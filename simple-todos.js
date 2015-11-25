@@ -1,4 +1,4 @@
-Tasks = Mongo.Collection('tasks');
+Tasks = new Mongo.Collection('tasks');
 
 if (Meteor.isClient) {
   // This code only runs on the client
