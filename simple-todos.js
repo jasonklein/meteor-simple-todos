@@ -4,7 +4,14 @@ if (Meteor.isClient) {
   // This code only runs on the client
   Template.body.helpers({
     tasks: function () {
-      return Tasks.find({}, { sort: { createdAt: -1 } } );
+      if (Session.get("hideCompleted")) {
+        return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
+      } else {
+        return Tasks.find({}, { sort: { createdAt: -1 } } );
+      }
+    },
+    hideCompleted: function () {
+      return Session.get("hideCompleted");
     }
   });
 
@@ -20,6 +27,9 @@ if (Meteor.isClient) {
       });
 
       ev.target.text.value = '';
+    },
+    "change .hide-completed input": function (ev) {
+      Session.set("hideCompleted", ev.target.checked);
     }
   });
 
