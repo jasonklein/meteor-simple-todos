@@ -49,6 +49,12 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.task.helpers({
+    displayText: function () {
+      return this.username ? "- " + this.text : this.text;
+    }
+  })
+
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
   });
