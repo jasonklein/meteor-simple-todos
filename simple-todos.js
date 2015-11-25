@@ -12,14 +12,14 @@ if (Meteor.isClient) {
     "submit .new-task": function (ev) {
       ev.preventDefault();
 
-      var text = event.target.text.value;
+      var text = ev.target.text.value;
 
       Tasks.insert({
         text: text,
         createdAt: new Date()
       });
 
-      event.target.text.value = '';
+      ev.target.text.value = '';
     }
   });
 }
